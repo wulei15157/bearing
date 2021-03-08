@@ -10,3 +10,10 @@ https://heartofmanproject.com/factory-2184-timken-bearing
 https://m.scottjamesonline.com/products.html
 
 http://www.nskfagbearings.com/brand_detail.asp?bid=375
+http://www.asiabearings.com/IKO/IKO_BAM1812_161859.html
+ 
+D-外径，d-内径  B是齿宽 
+ Cr:轴承的径向额定动负荷 Cor:轴承的径向额定静负荷 
+
+Grease RPM  润滑脂转速
+
