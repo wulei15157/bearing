@@ -2,65 +2,68 @@
 <html>
 
 <head>
-     <title>get</title>
+    <title>get</title>
     <meta content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-
     <link rel="stylesheet" type="text/css" href="css/build.min.css">
-    <!--    <script type="text/javascript" src="js/all.min.js"></script>
- -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js">
     </script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 </head>
 
 <body>
     <div class="container" id='app'>
         <h1 class="text-danger text-center">获取上一个url列表</h1>
-    
-
-    <div class="table-responsive">
-
-        <table class="table text-center   table-bordered">
-            <thead class="alert-info alert ">
-                <tr>
-                    <th class="text-center alert-link">访问地址</th>
-                    <th class="text-center alert-link">上级url</th>
-                    <th class="text-center alert-link">访问ip</th>
-                    <th class="text-center alert-link">城市</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for='(item,i) in message'>
-                    <td>{{ item.thisurl }}</td>
-                    <td>{{ item.url }}</td>
-                    <td>{{ item.ip }}</td>
-                    <td>{{ item.country }}</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="table-responsive">
+            <table class="table text-center   table-bordered">
+                <thead class="alert-info alert ">
+                    <tr>
+                        <th class="text-center alert-link">编号</th>
+                        <th class="text-center alert-link">上级url</th>
+                        <th class="text-center alert-link">访问ip</th>
+                        <th class="text-center alert-link">城市</th>
+                        <th class="text-center alert-link">访问的页面</th>
+                        <th class="text-center alert-link">访问时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for='(item,i) in message'>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.url }}</td>
+                        <td>{{ item.ip }}</td>
+                        <td>{{ item.country }}</td>
+                        <td>{{ item.thisurl }}</td>
+                        <td><span v-html='replace(item.created_at)'></span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <script type="text/javascript">
-    var s = []
-
-    var thisurl = document.URL;
-
-    var backurl = document.referrer;
-    var ip = returnCitySN["cip"]
-    var country = returnCitySN["cname"]
-    var a = { url: backurl, ip: ip, country: country, thisurl: thisurl }
-    s.push(a)
-    console.log(s)
     new Vue({
         el: '#app',
-        data: {
-            message: s
-        }
+        data() {
+            return {
+                message: null
+            }
+        },
+        mounted() {
+            axios
+                .get('http://139.224.195.102/api/users')
+                .then(response => (this.message = response.data.data))
+                .catch(function(error) { // 请求失败处理
+                    console.log(error);
+                });
+        },
+        methods: {
+            replace: function(input) {
 
+                return input.replace(/T/g, '  ').replace(/\.000000Z/, '')
+            }
+        }
     })
     </script>
 </body>
