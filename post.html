@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>get</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/build.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<body>
+    <div>
+       post
+    </div>
+    <script type="text/javascript">
+
+ document.write(`<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> `) ;
+    var thisurl = document.URL;
+    var backurl = document.referrer;
+    var ip = returnCitySN["cip"]
+    var country = returnCitySN["cname"]
+    var a = { url: backurl, ip: ip, country: country, thisurl: thisurl }
+      $.post("http://139.224.195.102/api/users",a,function(result){
+      window.location.href='http://139.224.195.102/get.html'
+  });
+
+    </script>
+</body>
+
+</html>
